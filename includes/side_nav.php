@@ -1,10 +1,10 @@
-<!-- Blog Sidebar Widgets Column -->
+
 <div class="col-md-4">
 
     <!-- Blog Search Well -->
     <div class="well">
 
-        <h4> Search</h4>
+        <h4>Rechercher un article</h4>
 
         <form action="./search.php" method="post">
             <div class="input-group">
@@ -23,7 +23,7 @@
 
     <!-- Blog Categories Well -->
     <div class="well">
-        <h4>Blog Categories</h4>
+        <h4>Sujets</h4>
         <div class="row">
             <div class="col-lg-12">
                 <ul class="list-unstyled">
