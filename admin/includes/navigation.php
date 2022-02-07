@@ -47,7 +47,7 @@
                 <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Sujets</a>
             </li>
             <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#users_dropdown"><i class="fa fa-fw fa-arrows-v"></i> Membres <i class="fa fa-fw fa-caret-down"></i></a>
+                <a href="javascript:" data-toggle="collapse" data-target="#users_dropdown"><i class="fa fa-fw fa-arrows-v"></i> Membres <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="users_dropdown" class="collapse">
                     <li>
                         <a href="#">Voir tous les membres</a>

@@ -31,7 +31,7 @@
                 $count=mysqli_num_rows ($search_query);
                 if ($count==0){
 
-                    echo  "<h1> No results!</h1>";
+                    echo  "<h1> Aucun article trouvé...</h1>";
 
                 }else{
 
