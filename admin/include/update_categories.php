@@ -25,7 +25,7 @@
             $query = "UPDATE categories SET cat_title = '$the_cat_title' WHERE cat_id = $cat_id ";
             $update_query = mysqli_query($connection, $query);
             if(!$update_query){
-                die('ERREUR REQUETE' . mysqli_error($connection));
+                die('ERREUR REQUETE ' . mysqli_error($connection));
             }
         }
 

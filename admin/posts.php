@@ -15,11 +15,7 @@
                     </h1>
 <?php
 
-    if(isset($_GET['source'])){
-        $source = $_GET['source'];
-    }else{
-        $source = '';
-    }
+$source = $_GET['source'] ?? '';
 
     switch($source) {
         case 'add_post';

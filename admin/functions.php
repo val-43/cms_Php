@@ -17,7 +17,7 @@ function insert_categories(){
             $query .= "VALUE('$cat_title') ";
             $create_category_query = mysqli_query($connection, $query);
             if (!$create_category_query) {
-                die('ERREUR REQUETE' . mysqli_error($connection));
+                die('ERREUR REQUETE ' . mysqli_error($connection));
             }
         }
 
@@ -55,5 +55,13 @@ function deleteCategories(){
         $query = "DELETE FROM categories WHERE cat_id = $the_cat_id ";
         $delete_query = mysqli_query($connection, $query);
         header("Location: categories.php");
+    }
+}
+
+function confirmQuery($result){
+
+    global $connection;
+    if(!$result){
+        die("ERREUR REQUETE : " . mysqli_error($connection));
     }
 }
