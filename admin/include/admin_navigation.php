@@ -33,18 +33,21 @@
                 <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
             </li>
             <li>
+                <a href="./categories.php"><i class="fa fa-fw fa-wrench"></i> Sujets</a>
+            </li>
+            <li>
                 <a href="javascript:;" data-toggle="collapse" data-target="#posts_dropdown"><i class="fa fa-fw fa-arrows-v"></i> Articles <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="posts_dropdown" class="collapse">
                    <li>
-                       <a href="#">Voir tous les articles</a>
+                       <a href="./post.php">Voir tous les articles</a>
                    </li>
                    <li>
                        <a href="#">Ajouter article</a>
                    </li>
                 </ul>
             </li>
-            <li>
-                <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Sujets</a>
+            <li >
+                <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Commentaires</a>
             </li>
             <li>
                 <a href="javascript:" data-toggle="collapse" data-target="#users_dropdown"><i class="fa fa-fw fa-arrows-v"></i> Membres <i class="fa fa-fw fa-caret-down"></i></a>
@@ -56,9 +59,6 @@
                         <a href="#">Ajouter membre</a>
                     </li>
                 </ul>
-            </li>
-            <li >
-                <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Commentaires</a>
             </li>
             <li>
                 <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> Profils</a>

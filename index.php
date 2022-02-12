@@ -1,6 +1,6 @@
 <?php include_once "includes/header.php" ?>
 <?php include_once "includes/navigation.php" ?>
-<?php include_once "includes/db.php" ?>
+<?php include_once "admin/include/db.php" ?>
     <!-- Page Content -->
     <div class="container">
         <div class="row">

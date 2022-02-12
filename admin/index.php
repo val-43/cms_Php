@@ -1,7 +1,8 @@
-<?php include "includes/header.php"?>
- <div id="wrapper">
+<?php include 'include/admin_header.php'?>
 
-<?php include "includes/navigation.php"?>
+<div id="wrapper">
+
+<?php include_once 'include/admin_navigation.php' ?>
 
         <div id="page-wrapper">
 
@@ -12,16 +13,15 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             Panneau d'administration
-                            <small>Subheading</small>
                         </h1>
-                        <ol class="breadcrumb">
-                            <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.php">Dashboard</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-file"></i> Blank Page
-                            </li>
-                        </ol>
+<!--                        <ol class="breadcrumb">-->
+<!--                            <li>-->
+<!--                                <i class="fa fa-dashboard"></i>  <a href="index.php">Dashboard</a>-->
+<!--                            </li>-->
+<!--                            <li class="active">-->
+<!--                                <i class="fa fa-file"></i> Blank Page-->
+<!--                            </li>-->
+<!--                        </ol>-->
                     </div>
                 </div>
                 <!-- /.row -->
@@ -32,4 +32,4 @@
         </div>
         <!-- /#page-wrapper -->
 
-<?php include "includes/footer.php"?>
+<?php include "include/admin_footer.php"?>
