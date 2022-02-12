@@ -33,7 +33,7 @@
                 <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
             </li>
             <li>
-                <a href="./categories.php"><i class="fa fa-fw fa-wrench"></i> Sujets</a>
+                <a href="./categories.php"><i class="fa fa-fw fa-wrench"></i> Catégories</a>
             </li>
             <li>
                 <a href="javascript:;" data-toggle="collapse" data-target="#posts_dropdown"><i class="fa fa-fw fa-arrows-v"></i> Articles <i class="fa fa-fw fa-caret-down"></i></a>

@@ -13,7 +13,7 @@
                 <div class="col-lg-12">
                     <h1 class="page-header">
                         Panneau d'administration
-                        <small>Sujets</small>
+                        <small>des catégories</small>
                     </h1>
                     <div class="col-xs-6">
 
@@ -46,6 +46,7 @@ if(isset($_GET['edit'])){
                                 <tr>
                                     <th>ID</th>
                                     <th>Nom de la catégorie</th>
+                                    <th colspan="2" class="text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
