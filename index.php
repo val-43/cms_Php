@@ -33,7 +33,7 @@
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> Posté le <?php echo $post_date ?></p>
                 <hr>
-                <img class="img-responsive" src="admin/images/<?php echo $post_image ?>" alt="">
+                <img class="img-responsive" width="430px" src="admin/images/<?php echo $post_image ?>" alt="">
                 <hr>
                 <p><?php echo $post_content ?></p>
                 <a class="btn btn-primary" href="#">Lire la suite... <span class="glyphicon glyphicon-chevron-right"></span></a>
