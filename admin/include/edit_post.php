@@ -57,6 +57,7 @@ while($row = mysqli_fetch_assoc($select_posts_by_id)) {
         $query .= "post_author = '$post_author', ";
         $query .= "post_status = '$post_status', ";
         $query .= "post_content = '$post_content', ";
+        $query .= "post_tags = '$post_tags', ";
         $query .= "post_image = '$post_image' ";
         $query .= "WHERE post_id = $the_post_id ";
 
