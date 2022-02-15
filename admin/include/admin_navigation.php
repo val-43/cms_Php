@@ -47,7 +47,7 @@
                 </ul>
             </li>
             <li >
-                <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Commentaires</a>
+                <a href="./comments.php"><i class="fa fa-fw fa-file"></i> Commentaires</a>
             </li>
             <li>
                 <a href="javascript:" data-toggle="collapse" data-target="#users_dropdown"><i class="fa fa-fw fa-arrows-v"></i> Membres <i class="fa fa-fw fa-caret-down"></i></a>
