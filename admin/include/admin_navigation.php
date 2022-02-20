@@ -33,13 +33,13 @@
                 <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Menu administration</a>
             </li>
             <li>
-                <a href="./categories.php"><i class="fa fa-fw fa-wrench"></i> Catégories</a>
+                <a href="categories.php"><i class="fa fa-fw fa-wrench"></i> Catégories</a>
             </li>
             <li>
                 <a href="javascript:;" data-toggle="collapse" data-target="#posts_dropdown"><i class="fa fa-fw fa-arrows-v"></i> Articles <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="posts_dropdown" class="collapse">
                    <li>
-                       <a href="./posts.php">Voir tous les articles</a>
+                       <a href="posts.php">Voir tous les articles</a>
                    </li>
                    <li>
                        <a href="posts.php?source=add_post">Ajouter article</a>
@@ -47,16 +47,16 @@
                 </ul>
             </li>
             <li >
-                <a href="./comments.php"><i class="fa fa-fw fa-file"></i> Commentaires</a>
+                <a href="comments.php"><i class="fa fa-fw fa-file"></i> Commentaires</a>
             </li>
             <li>
                 <a href="javascript:" data-toggle="collapse" data-target="#users_dropdown"><i class="fa fa-fw fa-arrows-v"></i> Membres <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="users_dropdown" class="collapse">
                     <li>
-                        <a href="#">Voir tous les membres</a>
+                        <a href="users.php"> Voir tous les membres</a>
                     </li>
                     <li>
-                        <a href="#">Ajouter membre</a>
+                        <a href="posts.php?source=add_user"> Ajouter membre</a>
                     </li>
                 </ul>
             </li>

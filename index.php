@@ -9,7 +9,7 @@
 
                 <?php
 
-                $query = "SELECT * FROM posts";
+                $query = "SELECT * FROM posts ";
                 $select_all_posts_query = mysqli_query($connection, $query);
 
                 while($row = mysqli_fetch_assoc($select_all_posts_query)){
@@ -22,6 +22,12 @@
                     $post_image = $row['post_image'];
                     $post_tags = $row['post_tags'];
                     $post_content = substr($row['post_content'],0,310);
+                    $post_status = $row['post_status'];
+
+                    if($post_status !== 'publié'){
+                        echo "<h1 class='text-center'> Il n'y a pas encore d'articles disponibles...</h1>";
+                    }else{
+
                 ?>
                     <h1 class="page-header">
                     Page Heading
@@ -42,7 +48,7 @@
                 <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id; ?>">Lire la suite... <span class="glyphicon glyphicon-chevron-right"></span></a>
 
 
-        <?php } ?>
+        <?php } } ?>
 
 
             </div>
