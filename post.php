@@ -41,21 +41,56 @@
                 <hr>
                 <p><?php echo $post_content ?></p>
 
-                <a class="btn btn-primary" href="#">Lire la suite... <span class="glyphicon glyphicon-chevron-right"></span></a>
+<!--                <a class="btn btn-primary" href="#">Lire la suite... <span class="glyphicon glyphicon-chevron-right"></span></a>-->
 
             <?php } ?>
                 <hr>
             <!-- Blog Comments -->
+            <?php
+
+            if(isset($_POST['create_comment'])){
+
+                $the_post_id = $_GET['p_id'];
+
+                $comment_author = $_POST['comment_author'];
+                $comment_email = $_POST['comment_email'];
+                $comment_content = $_POST['comment_content'];
+
+                $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date)";
+                $query .= "VALUES ($the_post_id, '$comment_author', '$comment_email', '$comment_content', 'Non approuvé', now())";
+
+                $create_comment_query = mysqli_query($connection, $query);
+
+                if(!$create_comment_query){
+
+                    die('Erreur Requete' . mysqli_error($connection));
+                }
+            }
+
+            ?>
 
             <!-- Comments Form -->
 
             <div class="well">
                 <h4>Laissez votre commentaire:</h4>
-                <form role="form">
+                <form action="" method="post" role="form">
                     <div class="form-group">
-                        <textarea class="form-control" rows="3"></textarea>
+                        <label for="comment_author">Votre nom et prénom
+                            <input type="text" name="comment_author" class="form-control" placeholder="Veuillez saisir votre nom">
+                            (requis)
+                        </label>
                     </div>
-                    <button type="submit" class="btn btn-primary">Commenter</button>
+                    <div class="form-group">
+                        <label for="comment_email">Votre mail
+                            <input type="email" name="comment_email" class="form-control" placeholder="Veuillez saisir votre mail">
+                            (requis)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment_content">Votre commentaire</label>
+                            <textarea class="form-control" rows="3" name="comment_content"></textarea>
+                    </div>
+                    <button type="submit" name="create_comment" class="btn btn-primary">Commenter</button>
                 </form>
             </div>
 
@@ -89,7 +124,7 @@
                     <!-- Nested Comment -->
                     <div class="media">
                         <a class="pull-left" href="#">
-                            <img class="media-object" src="http://placehold.it/64x64" alt="">
+                            <img class="media-object" src="" alt="">
                         </a>
                         <div class="media-body">
                             <h4 class="media-heading">Nested Start Bootstrap

@@ -8,10 +8,7 @@
         <th>Statut</th>
         <th>En réponse de</th>
         <th>Date</th>
-        <th>Approuver</th>
-        <th>Refuser</th>
-        <th>Effacer</th>
-        <th colspan="2" class="text-center">Actions</th>
+        <th colspan="3" class="text-center">Actions</th>
 
     </tr>
     </thead>
@@ -47,12 +44,19 @@
 
 
         echo "<td>$comment_status</td>";
+
+        $query = "SELECT * FROM posts WHERE post_id = $comment_post_id ";
+        $select_post_id_query = mysqli_query($connection, $query);
+        while ($row = mysqli_fetch_assoc($select_post_id_query)){
+            $post_id = $row['post_id'];
+            $post_title = $row['post_title'];
+        }
+
+        echo "<td><a href='../post.php?p_id=$post_id'>$post_title</a></td>";
         echo "<td>$comment_date</td>";
-        echo "<td>$comment_date</td>";
-        echo "<td><a href='comments.php?source=edit_comment&p_id=$comment_id'>Approuver</a></td>";
-        echo "<td><a href='comments.php?source=edit_comment&p_id=$comment_id'>Refuser</a></td>";
-        echo "<td><a href='comments.php?source=edit_comment&p_id=$comment_id'>Effacer</a></td>";
-        echo "<td><a href='comments.php?delete=$comment_id'>Supprimer</a></td>";
+        echo "<td><a href='comments.php?source=approve_comment&p_id=$comment_id'>Approuver</a></td>";
+        echo "<td><a href='comments.php?source=unapprove_comment&p_id=$comment_id'>Refuser</a></td>";
+        echo "<td><a href='comments.php?source=delete_comment&p_id=$comment_id'>Effacer</a></td>";
         echo "</tr>";
     }
     ?>
