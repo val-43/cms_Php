@@ -29,7 +29,7 @@ while($row = mysqli_fetch_assoc($select_posts)){
     $post_status = $row['post_status'];
     $post_image = $row['post_image'];
     $post_tags = $row['post_tags'];
-    $post_comments = $row['post_comment_count'];
+    $post_comments_count = $row['post_comment_count'];
     $post_date = $row['post_date'];
 
     echo "<tr>";
@@ -48,7 +48,7 @@ while($row = mysqli_fetch_assoc($select_posts)){
     echo "<td>$post_status</td>";
     echo "<td><img width='100' src='images/$post_image' alt='image'></td>";
     echo "<td>$post_tags</td>";
-    echo "<td>$post_comments</td>";
+    echo "<td>$post_comments_count</td>";
     echo "<td>$post_date</td>";
     echo "<td><a href='posts.php?source=edit_post&p_id=$post_id'>Modifier</a></td>";
     echo "<td><a href='posts.php?delete=$post_id'>Supprimer</a></td>";

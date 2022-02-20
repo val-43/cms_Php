@@ -19,9 +19,13 @@
     <?php
 
     $query = "SELECT * FROM comments";
-    $select_comments = mysqli_query($connection, $query);
+    $select_comments_query = mysqli_query($connection, $query);
 
-    while($row = mysqli_fetch_assoc($select_comments)){
+    if(!$select_comments_query){
+        die('ERREUR REQUETE'. mysqli_error($connection));
+    }
+
+    while($row = mysqli_fetch_assoc($select_comments_query)){
         $comment_id = $row['comment_id'];
         $comment_post_id = $row['comment_post_id'];
         $comment_author = $row['comment_author'];
