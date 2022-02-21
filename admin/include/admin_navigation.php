@@ -36,7 +36,7 @@
                 <a href="categories.php"><i class="fa fa-fw fa-wrench"></i> Catégories</a>
             </li>
             <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#posts_dropdown"><i class="fa fa-fw fa-arrows-v"></i> Articles <i class="fa fa-fw fa-caret-down"></i></a>
+                <a href="javascript:" data-toggle="collapse" data-target="#posts_dropdown"><i class="fa fa-fw fa-arrows-v"></i> Articles <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="posts_dropdown" class="collapse">
                    <li>
                        <a href="posts.php">Voir tous les articles</a>
@@ -56,7 +56,7 @@
                         <a href="users.php"> Voir tous les membres</a>
                     </li>
                     <li>
-                        <a href="posts.php?source=add_user"> Ajouter membre</a>
+                        <a href="users.php?source=add_user"> Ajouter membre</a>
                     </li>
                 </ul>
             </li>

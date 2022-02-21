@@ -99,6 +99,24 @@ if(isset($_POST['update_post'])){
         <label for="post_status">Statut de l'article</br>Pour que l'article soit affiché, le statut doit être : posté</label>
         <input value="<?php echo $post_status; ?>" type="text" class="form-control" name="post_status">
     </div>
+
+<!--        <div class="form-group">-->
+<!--            <label for="user_role">Rôles</label><br>-->
+<!--            <select name="user_role" id="post_category">-->
+<!--                --><?php
+//                $query = "SELECT * FROM users";
+//                $select_users = mysqli_query($connection, $query);
+//                confirmQuery($select_users);
+//
+//                while($row = mysqli_fetch_assoc($select_users)) {
+//                    $user_id = $row['user_id'];
+//                    $user_role = $row['user_role'];
+//                    echo "<option value='$user_id'>$user_role</option>";
+//                }
+//                ?>
+<!--            </select>-->
+<!--        </div>-->
+
     <div class="form-group">
         <label for="post_image">Image de l'article</label><br>
         <img width="100" src="./images/<?= $post_image;?>" alt="Image de l'article">
