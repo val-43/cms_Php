@@ -11,8 +11,6 @@ if(isset($_POST['create_user'])){
     $user_role = $_POST['user_role'];
     $user_username = $_POST['user_username'];
 //    $user_date = date('d-m-Y');
-
-
 //    move_uploaded_file($post_image_temp,"./images/$post_image");
 
     $query = "INSERT INTO users(user_firstname, user_lastname, user_email,user_password,user_role,user_username) ";
@@ -21,6 +19,7 @@ if(isset($_POST['create_user'])){
     $create_user_query = mysqli_query($connection, $query);
 
     confirmQuery($create_user_query);
+    header("Location: users.php");
 }
 ?>
 

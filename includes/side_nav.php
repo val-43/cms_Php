@@ -3,23 +3,35 @@
 
     <!-- Blog Search Well -->
     <div class="well">
-
         <h4>Rechercher un article</h4>
-
         <form action="./search.php" method="post">
             <div class="input-group">
-
                 <input name="search" type="text" class="form-control">
                 <span class="input-group-btn">
-                            <button name="submit" class="btn btn-default" type="submit">
-                                <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        </span>
+                    <button name="submit" class="btn btn-default" type="submit">
+                    <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
             </div>
         </form>
         <!-- /.input-group -->
     </div>
 
+    <!-- Login -->
+    <div class="well">
+        <h4>Espace Membres</h4>
+        <form action="includes/login.php" method="post">
+            <div class="form-group">
+                <input name="username" type="text" class="form-control" placeholder="Nom d'utilisateur">
+            </div>
+            <div class="input-group">
+                <input name="password" type="password" class="form-control" placeholder="Mot de passe">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" name="login" type="submit">Se connecter</button>
+                </span>
+            </div>
+        </form>
+    </div>
 
     <!-- Blog Categories Well -->
     <div class="well">
