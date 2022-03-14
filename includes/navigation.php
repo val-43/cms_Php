@@ -1,4 +1,5 @@
 <?php include_once "./admin/include/db.php"; ?>
+
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">

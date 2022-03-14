@@ -22,11 +22,11 @@ insert_categories(); ?>
 
                         <form action="" method="post">
                             <div class="form-group">
-                                <label for="cat_title">Nouvelle catégorie</label>
+                                <label for="cat_title">Ajouter catégorie</label>
                                     <input class="form-control" type="text" name="cat_title">
                             </div>
                             <div class="form-group">
-                                <input class="btn btn-primary" type="submit" name="submit" value="Créer une catégorie">
+                                <input class="btn btn-primary" type="submit" name="submit" value="Créer la catégorie">
                             </div>
                         </form>
 

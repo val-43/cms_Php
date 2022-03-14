@@ -26,6 +26,7 @@
 
                     if($post_status !== 'publié'){
                         echo "<h1 class='text-center'> Il n'y a pas encore d'articles disponibles...</h1>";
+                        break;
                     }else{
 
                 ?>
