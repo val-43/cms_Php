@@ -146,6 +146,10 @@
                 <!-- /.row -->
                 <?php
 
+                    $result = mysqli_query($connection, 'SELECT SUM(post_views_count) AS views_sum FROM posts');
+                    $row = mysqli_fetch_assoc($result);
+                    $sum = $row['views_sum'];
+
                     $query = "SELECT * FROM posts WHERE post_status = 'publié' ";
                     $select_draft_posts_query = mysqli_query($connection, $query);
                     $draft_post_count = mysqli_num_rows($select_draft_posts_query);
@@ -155,6 +159,15 @@
                     $select_undrafted_posts_query = mysqli_query($connection, $query);
                     $undrafted_post_count = mysqli_num_rows($select_undrafted_posts_query);
                     //echo "<div class='huge'>$undrafted_post_count</div>";
+
+                    $query = "SELECT * FROM comments WHERE comment_status = 'Accepté' ";
+                    $select_all_approved_comments = mysqli_query($connection, $query);
+                    $approved_comments_count = mysqli_num_rows($select_all_approved_comments);
+
+                    $query = "SELECT * FROM comments WHERE comment_status = 'Non accepté' ";
+                    $select_all_unapproved_comments = mysqli_query($connection, $query);
+                    $unapproved_comments_count = mysqli_num_rows($select_all_unapproved_comments);
+
 
                     $query = "SELECT * FROM users WHERE user_role = 'admin' ";
                     $select_admin_user_query = mysqli_query($connection, $query);
@@ -182,10 +195,10 @@
 
                                 <?php
 
-                                    $elements_text = ['Articles postés','Articles publiés' , 'Articles non publiés' ,'Commentaires' , 'Membres','Membres admin' ,'Membres utilisateurs' , 'Catégories'];
-                                    $elements_count = [$post_count,$draft_post_count, $undrafted_post_count, $comments_count, $users_count,$admin_user_count,$suscriber_user_count, $categories_count];
+                                    $elements_text = ['Articles postés','Articles publiés' , 'Articles non publiés' ,'Commentaires' ,'Commentaires publiés','Commentaires non publiés', 'Membres','Membres admin' ,'Membres utilisateurs' , 'Catégories', 'Vues totales'];
+                                    $elements_count = [$post_count,$draft_post_count, $undrafted_post_count, $comments_count, $approved_comments_count,$unapproved_comments_count, $users_count,$admin_user_count,$suscriber_user_count, $categories_count, $sum];
 
-                                    for($i = 0;$i < 8; $i++){
+                                    for($i = 0;$i < 11; $i++){
                                        echo "['$elements_text[$i]'" . "," . "$elements_count[$i]], ";
                                     }
                                 ?>

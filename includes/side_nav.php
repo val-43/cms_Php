@@ -18,8 +18,10 @@
     </div>
 
     <!-- Login -->
-    <div class="well">
-        <h4>Espace Membres</h4>
+<?php if(!isset($_SESSION['username']) && isset($_SESSION['username']) !== null){
+    echo <<< DELIMITER
+     <div class="well">
+        <h4>Se connecter</h4>
         <form action="includes/login.php" method="post">
             <div class="form-group">
                 <input name="username" type="text" class="form-control" placeholder="Nom d'utilisateur">
@@ -32,6 +34,9 @@
             </div>
         </form>
     </div>
+DELIMITER;
+} ?>
+
 
     <!-- Blog Categories Well -->
     <div class="well">

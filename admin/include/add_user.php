@@ -13,13 +13,19 @@ if(isset($_POST['create_user'])){
 //    $user_date = date('d-m-Y');
 //    move_uploaded_file($post_image_temp,"./images/$post_image");
 
+    $user_password = password_hash('$user_password', PASSWORD_BCRYPT, array('cost' => 12) );
+
     $query = "INSERT INTO users(user_firstname, user_lastname, user_email,user_password,user_role,user_username) ";
     $query .= "VALUES('$user_firstname','$user_lastname','$user_email','$user_password','$user_role','$user_username') ";
 
     $create_user_query = mysqli_query($connection, $query);
 
     confirmQuery($create_user_query);
-    header("Location: users.php");
+
+    echo "<div class='alert alert-success' style='text-align: center;'><h3>Utilisateur crée </h3><br><button><a href='users.php' style='text-decoration: none;'>
+    Retour au menu des utilisateurs</a></button></div>";
+
+    //header("Location: users.php");
 }
 ?>
 

@@ -11,19 +11,29 @@
         <a class="navbar-brand" href="../index.php">Retour au Blog</a>
     </div>
     <!-- Top Menu Items -->
+
     <ul class="nav navbar-right top-nav">
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php if(isset($_SESSION['username'])){ echo $_SESSION['username']; }?> <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-                <li>
-                    <a href="#"><i class="fa fa-fw fa-user"></i> Mon profil</a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="../includes/logout.php"><i class="fa fa-fw fa-power-off"></i> Se déconnecter</a>
-                </li>
-            </ul>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
+                <?php if(isset($_SESSION['username'])){ echo $_SESSION['username']; }?>
+                <b class="caret"></b></a>
+        <li>
+            <a href="#"><i class="fa fa-fw fa-user"></i> Mon profil</a>
         </li>
+        <li>
+            <a href="../includes/logout.php"><i class="fa fa-fw fa-power-off"></i> Se déconnecter</a>
+        </li>
+        
+
+<!--        <li>-->
+<!--            <a href="#"><i class="fa fa-fw fa-user"></i>En ligne: --><?php //echo users_online() ?><!--</a>-->
+<!--        </li>-->
+            <li><a href="#"><i class="fa fa-fw fa-user"></i>En ligne: <span class="usersonline"></span></a></li>
+        <ul class="dropdown-menu">
+
+            <li class="divider"></li>
+
+        </ul>
     </ul>
 
     <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->

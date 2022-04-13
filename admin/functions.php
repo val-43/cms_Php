@@ -58,6 +58,13 @@ function deleteCategories(){
     }
 }
 
+function query($query){
+    global $connection;
+    $result = mysqli_query($connection, $query);
+    confirmQuery($result);
+    return $result;
+}
+
 function confirmQuery($result){
 
     global $connection;
@@ -66,8 +73,63 @@ function confirmQuery($result){
     }
 }
 
+function fetchRecords($result){
+    return mysqli_fetch_array($result);
+}
+
 function escape($string): string
 {
     global $connection;
     return mysqli_real_escape_string($connection, trim($string));
 }
+
+function stmtConnection(){
+    global $connection;
+    return mysqli_stmt_init($connection);
+}
+
+function redirect($location){
+    return header("Location:" . $location);
+}
+
+function debug($value){
+    echo '<pre>';
+    print_r( $value );
+    echo '</pre>';
+}
+
+function users_online(){
+
+    if(isset($_GET['onlineusers'])){
+
+        global $connection;
+        if(!$connection){
+            session_start();
+            include("./include/db.php") ;
+        }
+        $session = session_id();
+        $time = time();
+        $time_out_in_seconds = 5;
+        $time_out = $time - $time_out_in_seconds;
+
+        $query = "SELECT * FROM users_online WHERE session = '$session'";
+        $send_query = mysqli_query($connection,$query);
+        $count = mysqli_num_rows($send_query);
+
+        if($count == NULL || $count == 0){
+
+            mysqli_query($connection, "INSERT INTO users_online (session,time) VALUES ('$session','$time' ) ");
+            mysqli_query($connection, "INSERT INTO users_online (session,time) VALUES ('$session','$time' ) ");
+
+        } else {
+
+            mysqli_query($connection, "UPDATE users_online SET time = '$time' WHERE session = '$session' ");
+        }
+
+        $users_online_query = mysqli_query($connection, "SELECT * FROM users_online WHERE time > '$time_out' ");
+        echo $count_user = mysqli_num_rows($users_online_query);
+
+    }
+
+}
+users_online();

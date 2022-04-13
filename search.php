@@ -2,6 +2,7 @@
 <?php  include "includes/header.php"; ?>
 
 
+
 <!-- Navigation -->
 
 <?php  include "includes/navigation.php"; ?>
@@ -45,15 +46,11 @@
 
 
                         ?>
-                        <h1 class="page-header">
-                            Page Heading
-                            <small>Secondary Text</small>
-                        </h1>
 
                         <!-- First Blog Post -->
-                        <h2>
+                        <h1>
                             <a href="#"><?php echo $post_title ?></a>
-                        </h2>
+                        </h1>
                         <p class="lead">
                             by <a href="index.php"><?php echo $post_author ?></a>
                         </p>

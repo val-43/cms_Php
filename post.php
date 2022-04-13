@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <?php include_once "includes/header.php" ?>
 <?php include_once "includes/navigation.php" ?>
 <?php include_once "admin/include/db.php" ?>
@@ -10,9 +11,18 @@
             <?php
 
             if(isset($_GET['p_id'])){
-                $the_post_id = $_GET['p_id'];
-            }
 
+            $the_post_id = $_GET['p_id'];
+
+            if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+
+                $view_query = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = $the_post_id ";
+                $send_query = mysqli_query($connection, $view_query);
+
+                if(!$send_query){
+                    die("ERREUR REQUETE" . mysqli_error($connection));
+                }
+            }
             $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
             $select_all_posts_query = mysqli_query($connection, $query);
 
@@ -24,14 +34,13 @@
                 $post_image = $row['post_image'];
                 $post_tags = $row['post_tags'];
                 ?>
-                <h1 class="page-header">
-                    Page Heading
+                <h2 class="page-header" style="display: none">
                     <small><?php echo $post_tags; ?></small>
-                </h1>
-                <!-- First Blog Post -->
-                <h2>
-                    <a href="#"><?php echo $post_title; ?></a>
                 </h2>
+                <!-- First Blog Post -->
+                <h1>
+                    <a href="#"><?php echo $post_title; ?></a>
+                </h1>
                 <p class="lead">
                     par <a href="index.php"><?php echo $post_author ?></a>
                 </p>
@@ -41,35 +50,44 @@
                 <hr>
                 <p><?php echo $post_content ?></p>
 
-            <?php } ?>
+            <?php }
+
+            }else{
+                header("Location: index.php");
+            }
+
+            ?>
                 <hr>
             <!-- Blog Comments -->
             <?php
 
-            if(isset($_POST['create_comment'])){
+            if(($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_POST['create_comment'])) {
 
                 $the_post_id = $_GET['p_id'];
+                $comment_author = mysqli_real_escape_string($connection, $_POST['comment_author']);
+                $comment_email = mysqli_real_escape_string($connection, $_POST['comment_email']);
+                $comment_content = mysqli_real_escape_string($connection, $_POST['comment_content']);
 
-                $comment_author = $_POST['comment_author'];
-                $comment_email = $_POST['comment_email'];
-                $comment_content = $_POST['comment_content'];
+                if (!empty($comment_author) && !empty($comment_email) && !empty($comment_content)) {
 
-                $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date)";
-                $query .= "VALUES ($the_post_id, '$comment_author', '$comment_email', '$comment_content', 'Non accepté', now())";
+                    $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date)";
+                    $query .= "VALUES ($the_post_id, '$comment_author', '$comment_email', '$comment_content', 'Non accepté', now())";
 
-                $create_comment_query = mysqli_query($connection, $query);
+                    $create_comment_query = mysqli_query($connection, $query);
 
-                if(!$create_comment_query){
+                    if (!$create_comment_query) {
 
-                    die('Erreur Requete : ' . mysqli_error($connection));
+                        die('Erreur Requete : ' . mysqli_error($connection));
+                    }
+
+//                    $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
+//                    $query .= "WHERE post_id = $the_post_id ";
+//                    $update_comment_count = mysqli_query($connection, $query);
+                } else {
+                    echo "<script>alert('Veuillez remplir tous les champs')</script>";
                 }
-
-                $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
-                $query .= "WHERE post_id = $the_post_id ";
-                $update_comment_count = mysqli_query($connection, $query);
-
+                redirect("/cms_Php/post.php?p_id=$the_post_id");
             }
-
             ?>
 
             <!-- Comments Form -->
@@ -77,21 +95,22 @@
             <div class="well">
                 <h4>Laissez votre commentaire:</h4>
                 <form action="" method="post" role="form">
+                    <input type="hidden" value="<?= isset($the_post_id) ?? null ?>">
                     <div class="form-group">
                         <label for="comment_author">Votre nom et prénom
-                            <input type="text" name="comment_author" class="form-control" placeholder="Veuillez saisir votre nom">
+                            <input id="comment_author" type="text" name="comment_author" class="form-control" placeholder="Veuillez saisir votre nom">
                             (requis)
                         </label>
                     </div>
                     <div class="form-group">
                         <label for="comment_email">Votre mail
-                            <input type="email" name="comment_email" class="form-control" placeholder="Veuillez saisir votre mail">
+                            <input id="comment_email" type="email" name="comment_email" class="form-control" placeholder="Veuillez saisir votre mail">
                             (requis)
                         </label>
                     </div>
                     <div class="form-group">
                         <label for="comment_content">Votre commentaire</label>
-                            <textarea class="form-control" rows="3" name="comment_content"></textarea>
+                            <textarea id="comment_content" class="form-control" rows="3" name="comment_content"></textarea>
                     </div>
                     <button type="submit" name="create_comment" class="btn btn-primary">Commenter</button>
                 </form>
@@ -137,5 +156,5 @@
         </div>
         <?php include_once "includes/side_nav.php" ?>
     </div>
-    <hr>
+
     <?php include_once "includes/footer.php" ?>

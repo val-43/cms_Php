@@ -1,3 +1,18 @@
+<?php include "include/admin_header.php"?>
+
+<div id="wrapper">
+
+    <?php include "include/admin_navigation.php"?>
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Panneau d'administration
+                        <small>des commentaires </small>
+                    </h1>
 <table class="table table-bordered table-hover">
     <thead>
     <tr>
@@ -19,7 +34,7 @@
 
     <?php
 
-    $query = "SELECT * FROM comments";
+    $query = "SELECT * FROM comments WHERE comment_post_id =" . mysqli_real_escape_string($connection,$_GET['id']). " ";
     $select_comments_query = mysqli_query($connection, $query);
 
     if(!$select_comments_query){
@@ -65,60 +80,89 @@
 
 if(isset($_GET['approveAll'])){
 
-    $the_comment_id = $_GET['approveAll'];
+    if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
 
-    $query = "UPDATE comments SET comment_status = 'Accepté' ";
-    $approve_comment_query = mysqli_query($connection, $query);
-    header("Location: comments.php");
+        $the_comment_id = $_GET['approveAll'];
 
+        $query = "UPDATE comments SET comment_status = 'Accepté' ";
+        $approve_comment_query = mysqli_query($connection, $query);
+        header("Location: comments.php");
+    }
 }
 
 if(isset($_GET['approve'])){
 
-    $the_comment_id = $_GET['approve'];
+    if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
 
-    $query = "UPDATE comments SET comment_status = 'Accepté' WHERE comment_id = $the_comment_id ";
-    $approve_comment_query = mysqli_query($connection, $query);
-    header("Location: comments.php");
+        $the_comment_id = $_GET['approve'];
+
+        $query = "UPDATE comments SET comment_status = 'Accepté' WHERE comment_id = $the_comment_id ";
+        $approve_comment_query = mysqli_query($connection, $query);
+        header("Location: comments.php");
+    }
 
 }
 
 if(isset($_GET['unapproveAll'])){
 
-    $the_comment_id = $_GET['unapproveAll'];
+    if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
 
-    $query = "UPDATE comments SET comment_status = 'Non accepté' ";
-    $unapprove_comment_query = mysqli_query($connection, $query);
-    header("Location: comments.php");
+        $the_comment_id = $_GET['unapproveAll'];
+
+        $query = "UPDATE comments SET comment_status = 'Non accepté' ";
+        $unapprove_comment_query = mysqli_query($connection, $query);
+        header("Location: comments.php");
+    }
 
 }
 
 if(isset($_GET['deleteAll'])){
 
-    $query = "DELETE FROM comments";
-    $deleteAll_comments_query = mysqli_query($connection, $query);
-    header("Location: comments.php");
+    if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
+
+        $query = "DELETE FROM comments";
+        $deleteAll_comments_query = mysqli_query($connection, $query);
+        header("Location: comments.php");
+    }
 
 }
 
 if(isset($_GET['unapprove'])){
 
-    $the_comment_id = $_GET['unapprove'];
+    if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
 
-    $query = "UPDATE comments SET comment_status = 'Non accepté' WHERE comment_id = $the_comment_id";
-    $unapprove_comment_query = mysqli_query($connection, $query);
-    header("Location: comments.php");
+        $the_comment_id = $_GET['unapprove'];
+
+        $query = "UPDATE comments SET comment_status = 'Non accepté' WHERE comment_id = $the_comment_id";
+        $unapprove_comment_query = mysqli_query($connection, $query);
+        header("Location: comments.php");
+    }
 
 }
 
 if(isset($_GET['delete'])){
 
-    $the_comment_id = $_GET['delete'];
+    if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
 
-    $query = "DELETE FROM comments WHERE comment_id = $the_comment_id ";
-    $delete_query = mysqli_query($connection, $query);
-    header("Location: comments.php");
+        $the_comment_id = $_GET['delete'];
+
+        $query = "DELETE FROM comments WHERE comment_id = $the_comment_id ";
+        $delete_query = mysqli_query($connection, $query);
+        header("Location: comments.php");
+    }
 
 }
 
 ?>
+
+</div>
+</div>
+<!-- /.row -->
+</div>
+<!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
+
+<?php include "include/admin_footer.php"?>
+
+

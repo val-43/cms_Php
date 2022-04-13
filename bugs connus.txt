@@ -1,0 +1,6 @@
+
+pagination déconne / manque de restrictions
+
+dropdown partie compte / déconnexion panneau admin
+
+mettre les checkboxes sur tous les CRUDS

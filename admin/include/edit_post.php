@@ -10,7 +10,7 @@ $select_posts_by_id = mysqli_query($connection, $query);
 while($row = mysqli_fetch_assoc($select_posts_by_id)) {
 
     $post_id = $row['post_id'];
-    $post_author = $row['post_author'];
+    $post_user = $row['post_user'];
     $post_title = $row['post_title'];
     $post_category = $row['post_category_id'];
     $post_status = $row['post_status'];
@@ -24,15 +24,14 @@ while($row = mysqli_fetch_assoc($select_posts_by_id)) {
 
     if(isset($_POST['update_post'])){
 
-        $post_author = escape($_POST['post_author']);
-        $post_title = escape($_POST['post_title']);
-        $post_category_id = escape($_POST['post_category']);
-        $post_status = escape($_POST['post_status']);
+        $post_user = mysqli_real_escape_string($connection, $_POST['post_user']);
+        $post_title = mysqli_real_escape_string($connection, $_POST['post_title']);
+        $post_category_id = $_POST['post_category'];
+        $post_status = mysqli_real_escape_string($connection, $_POST['post_status']);
         $post_image = $_FILES['post_image']['name'];
         $post_image_temp = $_FILES['post_image']['tmp_name'];
-        $post_tags = escape($_POST['post_tags']);
-        $post_content = escape($_POST['post_content']);
-
+        $post_tags = mysqli_real_escape_string($connection, $_POST['post_tags']);
+        $post_content = mysqli_real_escape_string($connection, $_POST['post_content']);
         move_uploaded_file($post_image_temp,"./images/$post_image");
 
         if(empty($post_image)){
@@ -54,7 +53,7 @@ while($row = mysqli_fetch_assoc($select_posts_by_id)) {
         $query .= "post_title = '$post_title', ";
         $query .= "post_category_id = '$post_category_id', ";
         $query .= "post_date = now(), ";
-        $query .= "post_author = '$post_author', ";
+        $query .= "post_user = '$post_user', ";
         $query .= "post_status = '$post_status', ";
         $query .= "post_content = '$post_content', ";
         $query .= "post_tags = '$post_tags', ";
@@ -63,6 +62,9 @@ while($row = mysqli_fetch_assoc($select_posts_by_id)) {
 
         $update_post = mysqli_query($connection, $query);
         confirmQuery($update_post);
+
+        echo "<div class='alert alert-success' style='text-align: center;'><h3>Article modifié</h3><br><button><a href='posts.php?p_id=$the_post_id' style='text-decoration: none;'>Retour au menu des articles</a></button><button><a href='../post.php?p_id=$the_post_id' style='text-decoration: none;'>Voir le post</a></button></div>";
+        //header("Refresh:3; url='posts.php' ");
     }
 
 ?>
@@ -70,7 +72,7 @@ while($row = mysqli_fetch_assoc($select_posts_by_id)) {
 <form action="" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="post_title">Titre de l'article</label>
-        <input value="<?php echo $post_title; ?>" type="text" class="form-control" name="post_title">
+        <input value="<?php echo stripcslashes($post_title); ?>" type="text" class="form-control" name="post_title">
     </div>
     <div class="form-group">
         <label for="post_category_id">Catégorie de l'article</label><br>
@@ -92,13 +94,48 @@ while($row = mysqli_fetch_assoc($select_posts_by_id)) {
 
     </div>
     <div class="form-group">
-        <label for="post_author">Auteur de l'article</label>
-        <input value="<?php echo $post_author; ?>" type="text" class="form-control" name="post_author">
+        <label for="post_user">Auteur de l'article</label><br>
+        <select name="post_user" id="post_user">
+
+            <?php echo "<option value='$post_user'>$post_user</option>"; ?>
+            <?php
+            $query = "SELECT * FROM users";
+            $select_post_authors = mysqli_query($connection, $query);
+            confirmQuery($select_post_authors);
+
+            while($row = mysqli_fetch_assoc($select_post_authors)) {
+                $user_id = $row['user_id'];
+                $username = $row['user_username'];
+
+                echo "<option value='$username'>$username</option>";
+            }
+            ?>
+
+        </select>
+
     </div>
     <div class="form-group">
-        <label for="post_status">Statut de l'article</br>Pour que l'article soit affiché, le statut doit être : posté</label>
-        <input value="<?php echo $post_status; ?>" type="text" class="form-control" name="post_status">
+        <label for="post_status">Statut de l'article</label>
+            <select name="post_status" id="">
+
+                <option value='<?= stripcslashes($post_status); ?>'><?= stripcslashes($post_status) ?></option>
+                <?php
+                if($post_status === 'publié') {
+                    echo '<option value="non-publié">Non publié</option>';
+
+                }else{
+                    echo '<option value="publié">Publié</option>';
+                }
+
+                ?>
+
+            </select>
+        <p> => Choisir "publié" pour le faire apparaitre sur la page d'accueil</p>
     </div>
+<!--    <div class="form-group">-->
+<!--        <label for="post_status">Statut de l'article</br>Pour que l'article soit affiché, le statut doit être : publié</label>-->
+<!--        <input value="--><?php //echo $post_status; ?><!--" type="text" class="form-control" name="post_status">-->
+<!--    </div>-->
     <div class="form-group">
         <label for="post_image">Image de l'article</label><br>
         <img width="100" src="./images/<?= $post_image;?>" alt="Image de l'article">
@@ -107,13 +144,11 @@ while($row = mysqli_fetch_assoc($select_posts_by_id)) {
 
     <div class="form-group">
         <label for="post_tags">Mots-clés de l'article</label>
-        <input value="<?php echo $post_tags; ?>" type="text" class="form-control" name="post_tags">
+        <input value="<?php echo stripcslashes($post_tags); ?>" type="text" class="form-control" name="post_tags">
     </div>
     <div class="form-group">
-        <label for="post_content">Post Content</label>
-        <textarea  class="form-control" name="post_content" id="" cols="30" rows="10">
-            <?php echo $post_content; ?>
-      </textarea>
+        <label for="post_content">Texte Article</label>
+        <textarea  class="form-control" name="post_content" id="summernote" cols="30" rows="10"><?php echo stripcslashes($post_content); ?></textarea>
     </div>
     <div class="form-group">
         <input type="submit" class="btn btn-primary" name="update_post" value="Modifier l'article">

@@ -47,7 +47,7 @@
 //        }
 
         echo "<td class='text-center'><a href='users.php?source=edit_user&edit_user=$user_id'>Modifier</a></td>";
-        echo "<td class='text-center'><a href='users.php?delete=$user_id'>Effacer</a></td>";
+        echo "<td class='text-center'><a onClick=\"javascript: return confirm('Etes vous certain de la suppression ? '); \" href='users.php?delete=$user_id'>Effacer</a></td>";
         echo "<td class='text-center'><a href='users.php?change_to_admin=$user_id'>Pass Admin</a></td>";
         echo "<td class='text-center'><a href='users.php?change_to_suscriber=$user_id'>Pass Utilisateur</a></td>";
         echo "</tr>";
@@ -87,12 +87,14 @@ if(isset($_GET['change_to_suscriber'])){
 
 if(isset($_GET['delete'])){
 
-    $the_user_id = $_GET['delete'];
+    if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin'){
 
-    $query = "DELETE FROM users WHERE user_id = $the_user_id ";
-    $delete_user_query = mysqli_query($connection, $query);
-    header("Location: users.php");
+        $the_user_id = mysqli_real_escape_string($connection, $_GET['delete']);
 
+        $query = "DELETE FROM users WHERE user_id = $the_user_id ";
+        $delete_user_query = mysqli_query($connection, $query);
+        header("Location: users.php");
+    }
 }
 
 ?>

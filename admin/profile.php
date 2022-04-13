@@ -94,7 +94,7 @@
                         <!--    </div>-->
                         <div class="form-group">
                             <label for="user_password">Mot de passe</label>
-                            <input type="text" class="form-control" name="user_password" value="<?= $user_password ?>">
+                            <input autocomplete="off" type="text" class="form-control" name="user_password" >
                         </div>
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary" name="edit_user" value="Modifier profil">

@@ -26,12 +26,36 @@
                     $cat_title = $row['cat_title'];
                     echo "<li><a href='#'>$cat_title</a></li>";
                 }
+                ?>
+                <?php if(!isset($_SESSION['username'])){
 
+                echo "<li>
+                    <a href='registration.php'>Devenir Membre</a>
+                </li>";
+                }
                 ?>
 
-                <li>
-                    <a href="admin">Admin</a>
-                </li>
+                <?php
+                if(isset($_SESSION['user_role']) && ($_SESSION['user_role'] === 'admin')){
+                    echo "<li>
+                     <a href='admin'>Admin</a>
+                </li>";
+                }
+                ?>
+
+                <?php if(isset($_SESSION['username'])){
+                    echo <<< DELIMITER
+                <div style="float: right">
+                    <li>
+                        <a href="#" class="username-display" style="color: darkgreen;" > {$_SESSION['username']} Est connecté</a>
+                    </li>
+                    <li>
+                        <a href="includes/logout.php" class="username-display" style="color: red;" >Se déconnecter</a>
+                    </li>
+                </div>
+DELIMITER;
+                } ?>
+
 <!--                <li>-->
 <!--                    <a href="#">Services</a>-->
 <!--                </li>-->

@@ -28,10 +28,15 @@ if(isset($_POST['login'])){
         $db_user_password = $row['user_password'];
     }
 
-    if($username !== $db_user_username && $password !== $db_user_password){
-        header("Location: ../index.php");
-    }else if($username === $db_user_username && $password === $db_user_password){
+    //$password = crypt($password, $db_user_password);
 
+    //if($username !== $db_user_username && $password !== $db_user_password){
+    //    header("Location: ../index.php");
+    //}else if($username === $db_user_username && $password === $db_user_password && $db_user_role === 'admin'){
+
+    if(password_verify($password, $db_user_password) && ($db_user_role === 'admin')){
+
+        $_SESSION['user_id'] = $db_user_id;
         $_SESSION['username'] = $db_user_username;
         $_SESSION['firstname'] = $db_user_firstname;
         $_SESSION['lastname'] = $db_user_lastname;
@@ -39,8 +44,18 @@ if(isset($_POST['login'])){
 
         header("Location: ../admin/index.php");
 
-    }else{
+    }else if($db_user_role === 'utilisateur'){
+
+        $_SESSION['user_id'] = $db_user_id;
+        $_SESSION['username'] = $db_user_username;
+        $_SESSION['firstname'] = $db_user_firstname;
+        $_SESSION['lastname'] = $db_user_lastname;
+        $_SESSION['user_role'] = $db_user_role;
+
         header("Location: ../index.php");
+
+    }else{
+        echo 'something went wrong';
     }
 
 }
