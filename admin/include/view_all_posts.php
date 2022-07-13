@@ -1,5 +1,9 @@
 <?php
 
+
+include("delete_modal.php");
+
+
 if(isset($_POST['checkBoxArray'])){
     foreach($_POST['checkBoxArray'] as $checkBoxPostId){
         $bulk_options = $_POST['bulk_options'];
@@ -77,7 +81,7 @@ if(isset($_POST['checkBoxArray'])){
     </div>
     <div class="col-xs-4">
         <input type="submit" name="submit" class="btn btn-success" value="Appliquer">
-        <a class="btn btn-primary" href="posts.php?source=add_post">Créer</a>
+        <a class="btn btn-primary" href="posts.php?source=add_post">Créer un article</a>
     </div>
 <thead>
 

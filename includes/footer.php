@@ -2,7 +2,7 @@
 <footer>
     <div class="row">
         <div class="col-lg-12">
-            <p>Coded with Phpain & ShitStrap &copy; Valoche 2022 <br><br> Envie d'un blog similaire ou d'un tout autre projet ? Contactez ce talentueux développeur =><a href="#">ici</a><=</p>
+            <p>Coded with Phpain & ShitStrap &copy; Valoche 2022 <br><br> Envie d'un blog similaire ou d'un tout autre projet ? Contactez ce talentueux développeur =><a href="https://val-43.gitlab.io/portfolio-perso/index.html">ici</a><=</p>
         </div>
         <!-- /.col-lg-12 -->
     </div>

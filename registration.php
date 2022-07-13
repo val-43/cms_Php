@@ -22,7 +22,7 @@ if(isset($_POST['submit'])){
         $email = mysqli_real_escape_string($connection, $email);
         $password = mysqli_real_escape_string($connection, $password);
 
-        $password = password_hash('$password', PASSWORD_BCRYPT, array('cost' => 12) );
+        $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12) );
 
 //        $query = "SELECT user_randSalt FROM users";
 //        $select_randSalt_query = mysqli_query($connection, $query);
@@ -30,7 +30,7 @@ if(isset($_POST['submit'])){
 //        if(!$select_randSalt_query){
 //            die("Erreur Requete" . mysqli_error($connection));
 //        }
-
+//
 //        $row = mysqli_fetch_array($select_randSalt_query);
 //
 //        $salt = $row['user_randSalt'];
@@ -47,8 +47,6 @@ if(isset($_POST['submit'])){
         if(!$register_user_query){
             die("ERREUR REQUETE" . mysqli_error($connection) . ' ' . mysqli_errno($connection));
         }
-
-
 
     }else{
         $message = '<h3 class="text-center" style="color:red;">Veuillez remplir tous les champs</h3>';

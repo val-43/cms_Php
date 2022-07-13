@@ -16,7 +16,7 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
                 <?php if(isset($_SESSION['username'])){ echo $_SESSION['username']; }?>
-                <b class="caret"></b></a>
+                </a>
         <li>
             <a href="#"><i class="fa fa-fw fa-user"></i> Mon profil</a>
         </li>
