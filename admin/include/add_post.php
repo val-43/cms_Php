@@ -1,7 +1,7 @@
 <?php
 
 if(isset($_POST['create_post'])){
-
+    global $connection;
     $post_title= mysqli_real_escape_string($connection, $_POST['title']);
     $post_user= mysqli_real_escape_string($connection, $_POST['post_user']);
     $post_category_id= $_POST['post_category'];
@@ -12,8 +12,15 @@ if(isset($_POST['create_post'])){
     $post_content= mysqli_real_escape_string($connection, $_POST['post_content']);
     $post_date= date('d-m-y');
 
+    if(empty($post_tags)){
+        $post_tags = "Divers";
+    }
+    if(empty($post_image)){
+        $post_image = '';
+    }else{
+        move_uploaded_file($post_image_temp,"./images/$post_image");
+    }
 
-    move_uploaded_file($post_image_temp,"./images/$post_image");
 
     $query = "INSERT INTO posts(post_category_id, post_title, post_user, post_date,post_image,post_content,post_tags,post_status) ";
     $query .= "VALUES({$post_category_id},'{$post_title}','{$post_user}',now(),'{$post_image}','{$post_content}','{$post_tags}','{$post_status}') ";
@@ -35,6 +42,7 @@ if(isset($_POST['create_post'])){
         <label for="post_category">Catégorie de l'article</label><br>
         <select name="post_category" id="post_category">
             <?php
+            global $connection;
             $query = "SELECT * FROM categories";
             $select_categories = mysqli_query($connection, $query);
             confirmQuery($select_categories);
@@ -89,7 +97,7 @@ if(isset($_POST['create_post'])){
         <label for="title">Mots-clés de l'article</label>
         <input type="text" class="form-control" name="post_tags">
     </div>
-    <div class="form-group" id="summernote">
+    <div class="form-group" >
         <textarea class="form-control" name="post_content" id="summernote" cols="30" rows="10">
       </textarea>
     </div>

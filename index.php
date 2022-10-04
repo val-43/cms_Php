@@ -26,9 +26,12 @@
                 }
 
                 $posts_by_page = 5;
-                $post_query_count = "SELECT * FROM posts";
+                $post_query_count = "SELECT * FROM posts WHERE post_status = 'publié' ";
                 $find_count = mysqli_query($connection, $post_query_count);
                 $count = mysqli_num_rows($find_count);
+                if($count<1){
+                    echo "<h1 class='text-center'>Aucun article pour le moment ...</h1>";
+                }else {
                 $count = ceil($count / $posts_by_page);
 
                 $query = "SELECT * FROM posts WHERE post_status = 'publié' LIMIT $page_1,$posts_by_page";
@@ -36,7 +39,7 @@
 
 
 
-                while($row = mysqli_fetch_assoc($select_all_posts_query)){
+                while($row = mysqli_fetch_assoc($select_all_posts_query)) {
 
                     $post_id = $row['post_id'];
                     $post_title = $row['post_title'];
@@ -45,8 +48,9 @@
                     $post_date = $row['post_date'];
                     $post_image = $row['post_image'];
                     $post_tags = $row['post_tags'];
-                    $post_content = substr($row['post_content'],0,320);
+                    $post_content = substr($row['post_content'], 0, 320);
                     $post_status = $row['post_status'];
+
 
                 ?>
 
@@ -67,7 +71,7 @@
                 <p><?php echo $post_content ?> ...</p>
                 <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id; ?>">Lire la suite... <span class="glyphicon glyphicon-chevron-right"></span></a>
                     <hr>
-        <?php }  ?>
+        <?php  } } ?>
             </div>
             <?php include_once "includes/side_nav.php" ?>
         </div>

@@ -116,7 +116,7 @@ function users_online(){
         $send_query = mysqli_query($connection,$query);
         $count = mysqli_num_rows($send_query);
 
-        if($count == NULL || $count == 0){
+        if($count === NULL || $count === 0){
 
             mysqli_query($connection, "INSERT INTO users_online (session,time) VALUES ('$session','$time' ) ");
             mysqli_query($connection, "INSERT INTO users_online (session,time) VALUES ('$session','$time' ) ");
@@ -132,4 +132,36 @@ function users_online(){
     }
 
 }
-users_online();
+
+function recordCount($table){
+
+    global $connection;
+    $query = "SELECT * FROM " . $table;
+    $select_all_posts = mysqli_query($connection, $query);
+    $result = mysqli_num_rows($select_all_posts);
+    if(!$result === 0){
+        confirmQuery($result);
+    }
+    return $result;
+}
+
+function sumViews($table){
+    global $connection;
+    $query = "SELECT SUM(post_views_count) AS views_sum FROM " . $table;
+    $post_views_count = mysqli_query($connection, $query);
+    $result = mysqli_fetch_assoc($post_views_count);
+    if(!$result === 0){
+        $result = $result['views_sum'];
+    }
+    return $result['views_sum'];
+}
+
+function checkStatus($table,$column,$status){
+    global $connection;
+    $query = "SELECT * FROM $table WHERE $column = '$status'";
+    $result = mysqli_query($connection,$query);
+    return mysqli_num_rows($result);
+}
+
+
+

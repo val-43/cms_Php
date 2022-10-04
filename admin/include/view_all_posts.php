@@ -1,8 +1,6 @@
 <?php
 
-
 include("delete_modal.php");
-
 
 if(isset($_POST['checkBoxArray'])){
     foreach($_POST['checkBoxArray'] as $checkBoxPostId){
@@ -44,6 +42,7 @@ if(isset($_POST['checkBoxArray'])){
                     $post_image = $row['post_image'];
                     $post_tags = mysqli_real_escape_string($connection,$row['post_tags']);
                     $post_content = mysqli_real_escape_string($connection, $row['post_content']);
+
                 }
 
                 $query = "INSERT INTO posts(post_category_id, post_title, post_user, post_date, post_status, post_tags, post_content, post_image) ";
@@ -121,6 +120,14 @@ while($row = mysqli_fetch_assoc($select_posts)){
     $post_date = $row['post_date'];
     $post_views_count = $row['post_views_count'];
 
+    if(empty($post_tags)){
+        $post_tags = "Divers";
+    }
+    if(empty($post_image)){
+        $post_image = 'no-image.webp';
+
+    }
+
     echo "<tr>";
     ?>
     <td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?= $post_id ?>'></td>
@@ -147,7 +154,7 @@ while($row = mysqli_fetch_assoc($select_posts)){
 
     echo "<td>$cat_title</td>";
     echo "<td>$post_status</td>";
-    echo "<td><img width='100' src='images/$post_image' alt='image'></td>";
+    echo "<td class='text-center'><img width='100' src='images/$post_image' alt='image'></td>";
     echo "<td>$post_tags</td>";
 
     $query = "SELECT * FROM comments WHERE comment_post_id = $post_id";
@@ -161,8 +168,9 @@ while($row = mysqli_fetch_assoc($select_posts)){
     echo "<td>$post_date</td>";
     echo "<td>$post_views_count<br><a href='posts.php?reset=$post_id'>Reset vues</a></td>";
     echo "<td><a href='../post.php?p_id=$post_id'>Voir</a></td>";
-    echo "<td><a href='posts.php?source=edit_post&p_id=$post_id'>Modifier</a></td>";
-    echo "<td><a onClick=\"javascript: return confirm('Etes vous certain de la suppression ? '); \" href='posts.php?delete=$post_id'>Supprimer</a></td>";
+    echo "<td><a href='posts.php?source=edit_post&p_id=$post_id' >Modifier</a></td>";
+//    echo "<td><a onClick=\"javascript: return confirm('Etes vous certain de la suppression ? '); \" href='posts.php?delete=$post_id'>Supprimer</a></td>";
+    echo "<td><a rel='$post_id' href='javascript:void(0)' class='delete_link'>Supprimer</a></td>";
     echo "</tr>";
 }
 ?>
@@ -197,3 +205,16 @@ if(isset($_GET['reset'])){
 }
 
 ?>
+<script>
+    $(document).ready(function () {
+        $(".delete_link").on('click', function () {
+            let id = $(this).attr("rel");
+            let delete_url = "posts.php?delete="+ id +" ";
+            $(".modal_delete_link").attr("href", delete_url);
+
+            $("#myModal").modal('show');
+        });
+    });
+</script>
+
+
